@@ -1,0 +1,57 @@
+USE [blogs]
+GO
+/****** Object:  Table [dbo].[autores]    Script Date: 09/10/2024 12:37:52 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[autores](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [varchar](50) NOT NULL,
+	[apellido] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_autores] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[blogs]    Script Date: 09/10/2024 12:37:52 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[blogs](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[texto] [varchar](max) NOT NULL,
+	[idAutor] [int] NOT NULL,
+ CONSTRAINT [PK_blogs] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[blogss]    Script Date: 09/10/2024 12:37:52 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[blogss](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[texto] [varchar](max) NOT NULL,
+	[idAutor] [int] NOT NULL,
+ CONSTRAINT [PK_blogss] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[blogs]  WITH CHECK ADD  CONSTRAINT [FK_blogs_autores] FOREIGN KEY([idAutor])
+REFERENCES [dbo].[autores] ([id])
+GO
+ALTER TABLE [dbo].[blogs] CHECK CONSTRAINT [FK_blogs_autores]
+GO
+ALTER TABLE [dbo].[blogss]  WITH CHECK ADD  CONSTRAINT [FK_blogss_autores] FOREIGN KEY([idAutor])
+REFERENCES [dbo].[autores] ([id])
+GO
+ALTER TABLE [dbo].[blogss] CHECK CONSTRAINT [FK_blogss_autores]
+GO
